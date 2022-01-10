@@ -24,7 +24,7 @@ export const createTopic = async (req: any, res: any) => {
     });
     if (result.insertId != "") {
       res.status(200);
-      res.send("Success")
+      res.send("Success");
     } else {
       res.status(400);
       res.send("Fail");
@@ -39,7 +39,7 @@ export const createTopic = async (req: any, res: any) => {
 };
 
 export const getTopic = async (req: any, res: any) => {
-  let teamID:string = req.body.teamID;
+  let teamID: string = req.body.teamID;
 
   let sql: string = `SELECT * from topics	Where teamID = '${teamID}'`;
 
@@ -72,4 +72,3 @@ export const getTopic = async (req: any, res: any) => {
     res.send(resp);
   }
 };
-

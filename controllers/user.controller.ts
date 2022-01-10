@@ -16,7 +16,6 @@ export const getUser = async (req: any, res: any) => {
 
     let json = JSON.stringify(result);
 
-
     if (result.length != 0) {
       res.status(200);
       res.send(JSON.parse(json));
@@ -57,7 +56,7 @@ export const addUser = async (req: any, res: any) => {
 
     if (result.insertId != "") {
       res.status(200);
-      res.send("Success")
+      res.send("Success");
     } else {
       res.status(400);
       res.send("Fail");
@@ -71,10 +70,10 @@ export const addUser = async (req: any, res: any) => {
   }
 };
 
-export const getById = async (req:any, res: any) => {
-  let id:string = req.body.userID;
+export const getById = async (req: any, res: any) => {
+  let id: string = req.body.userID;
 
-  let sql:string = `Select * from users where ID = '${id}'`;
+  let sql: string = `Select * from users where ID = '${id}'`;
 
   try {
     const result: any = await new Promise((resolve, reject) => {
@@ -88,18 +87,18 @@ export const getById = async (req:any, res: any) => {
     });
 
     if (result.length != 0) {
-      let resp: any = JSON.parse(JSON.stringify(result[0]))
+      let resp: any = JSON.parse(JSON.stringify(result[0]));
       res.status(200);
       res.send(resp);
     } else {
       res.status(400);
-      res.send('not found');
+      res.send("not found");
     }
   } catch (error) {
     res.status(500);
     res.send(error);
   }
-}
+};
 
 export const updateUser = async (req: any, res: any) => {
   let data: user = {
@@ -134,11 +133,11 @@ export const updateUser = async (req: any, res: any) => {
   }
 };
 
-export const login = async(req:any, res:any) => {
-  let data:user = {
-    username:req.body.username,
-    password:req.body.password
-  }
+export const login = async (req: any, res: any) => {
+  let data: user = {
+    username: req.body.username,
+    password: req.body.password,
+  };
 
   let sql = `Select ID, username, password from users where username = '${data.username}' and password= '${data.password}'`;
 
@@ -154,15 +153,15 @@ export const login = async(req:any, res:any) => {
     });
 
     if (result.length != 0) {
-      let resp: any = JSON.parse(JSON.stringify(result[0]))
+      let resp: any = JSON.parse(JSON.stringify(result[0]));
       res.status(200);
       res.send(resp);
     } else {
       res.status(400);
-      res.send('not found');
+      res.send("not found");
     }
   } catch (error) {
     res.status(500);
     res.send(error);
   }
-}
+};

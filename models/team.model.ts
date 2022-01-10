@@ -1,5 +1,5 @@
 export interface team {
-    teamID?:string;
-    name?:string;
-    key?:string;
+  teamID?: string;
+  name?: string;
+  key?: string;
 }

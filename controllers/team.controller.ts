@@ -38,7 +38,7 @@ export const createTeam: any = async (req: any, res: any) => {
   let data: any = {
     name: req.body.teamName,
     key: req.body.teamKey,
-    status: 1
+    status: 1,
   };
 
   let sql: string = `Insert into teams set ?`;
@@ -66,36 +66,36 @@ export const createTeam: any = async (req: any, res: any) => {
     res.send("Server issues");
   }
 };
-export const getTeamKey: any = async (req:any, res:any) => {
-    let sql:string = `Select teams.key as teamKey from teams`;
+export const getTeamKey: any = async (req: any, res: any) => {
+  let sql: string = `Select teams.key as teamKey from teams`;
 
-    try {
-        const result: any = await new Promise((resolve, reject) => {
-          pool.query(sql, (error: any, results: object, fields: any) => {
-            if (error) {
-              reject(error);
-            } else {
-              resolve(results);
-            }
-          });
-        });
-    
-        let json = JSON.stringify(result);
-    
-        if (result.length != 0) {
-          res.status(200);
-          res.send(JSON.parse(json));
+  try {
+    const result: any = await new Promise((resolve, reject) => {
+      pool.query(sql, (error: any, results: object, fields: any) => {
+        if (error) {
+          reject(error);
         } else {
-          let resp = {
-            status: "0",
-            detail: "",
-          };
+          resolve(results);
         }
-      } catch (error) {
-        let resp = {
-          status: "e",
-          detail: error,
-        };
-        res.send(error);
-      }
+      });
+    });
+
+    let json = JSON.stringify(result);
+
+    if (result.length != 0) {
+      res.status(200);
+      res.send(JSON.parse(json));
+    } else {
+      let resp = {
+        status: "0",
+        detail: "",
+      };
+    }
+  } catch (error) {
+    let resp = {
+      status: "e",
+      detail: error,
+    };
+    res.send(error);
+  }
 };
